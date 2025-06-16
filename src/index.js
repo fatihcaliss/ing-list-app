@@ -13,6 +13,9 @@ class App extends LitElement {
       margin: 0 !important;
       padding: 0;
     }
+    #outlet {
+      margin: 0 48px;
+    }
   `;
 
   constructor() {
