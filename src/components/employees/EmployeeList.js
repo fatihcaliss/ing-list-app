@@ -1,8 +1,6 @@
 import {LitElement, html, css} from 'lit';
 import {getEmployees, deleteEmployee} from '../../state/store';
 import {t} from '../../localization/index.js';
-import editIcon from '../../assets/edit-icon.svg';
-import deleteIcon from '../../assets/delete-icon.svg';
 
 class EmployeeList extends LitElement {
   static styles = css`
@@ -465,10 +463,10 @@ class EmployeeList extends LitElement {
                       <td>${employee.position}</td>
                       <td>
                         <button @click=${() => this.handleEdit(employee.id)}>
-                          <img class='edit-icon' src="${editIcon}"></img>
+                          <img class='edit-icon' src="/src/assets/edit-icon.svg"></img>
                         </button>
                         <button @click=${() => this.handleDelete(employee.id)}>
-                          <img class='delete-icon' src="${deleteIcon}"></img>
+                          <img class='delete-icon' src="/src/assets/delete-icon.svg"></img>
                         </button>
                       </td>
                     </tr>
@@ -524,10 +522,10 @@ class EmployeeList extends LitElement {
                     </div>
                     <div class="card-actions">
                       <button @click=${() => this.handleEdit(employee.id)}>
-                        <img class='edit-icon' src="${editIcon}"></img>
+                        <img class='edit-icon' src="/src/assets/edit-icon.svg"></img>
                       </button>
                       <button @click=${() => this.handleDelete(employee.id)}>
-                        <img class='delete-icon' src="${deleteIcon}"></img>
+                        <img class='delete-icon' src="/src/assets/delete-icon.svg"></img>
                       </button>
                     </div>
                   </div>

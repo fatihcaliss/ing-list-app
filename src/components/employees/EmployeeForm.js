@@ -6,63 +6,114 @@ class EmployeeForm extends LitElement {
   static styles = css`
     :host {
       display: block;
-      padding: 16px;
-      font-family: Arial, sans-serif;
+      padding: 24px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      box-sizing: border-box;
     }
+
     h1 {
       color: #f15b15;
-      margin: 0px 4px 14px 0px;
-      font-weight: bold;
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0 0 24px 0;
+      font-weight: 600;
+      font-size: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     .error {
-      color: red;
-      font-size: 12px;
-      margin: 4px 0;
+      color: #dc2626;
+      font-size: 13px;
+      margin: 4px 0 12px;
+      font-weight: 500;
     }
 
     .close-btn {
-      float: right;
-
       background: none;
       border: none;
-      font-size: 32px;
+      font-size: 28px;
       cursor: pointer;
       color: #f15b15;
+      padding: 4px;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
+
     .close-btn:hover {
-      color: #f15b15;
+      background-color: rgba(241, 91, 21, 0.1);
+      transform: scale(1.1);
     }
+
     label {
-      margin-top: 10px;
+      margin-top: 12px;
       display: block;
-      font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
+      color: #374151;
+      font-size: 14px;
     }
-    select {
-      width: 51%;
-      padding: 6px;
-      margin: 4px 0;
-      border: 1px solid #f15b15;
-      border-radius: 4px;
-    }
+
+    select,
     input {
-      width: 50%;
-      padding: 6px;
-      margin: 4px 0;
-      border: 1px solid #f15b15;
-      border-radius: 4px;
+      width: 100%;
+      max-width: 100%;
+      padding: 10px 12px;
+      margin: 6px 0;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      background-color: #f9fafb;
+      box-sizing: border-box;
+    }
+
+    select:focus,
+    input:focus {
+      outline: none;
+      border-color: #f15b15;
+      box-shadow: 0 0 0 3px rgba(241, 91, 21, 0.1);
+      background-color: #ffffff;
+    }
+
+    select:hover,
+    input:hover {
+      border-color: #f15b15;
     }
 
     button {
-      padding: 8px 12px;
+      padding: 12px 20px;
       background-color: #f15b15;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      margin-top: 24px;
+      width: 100%;
     }
+
+    button:hover {
+      background-color: #d94d12;
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
     /* Modal Styles */
     .modal-overlay {
       position: fixed;
@@ -74,19 +125,70 @@ class EmployeeForm extends LitElement {
       display: flex;
       justify-content: center;
       align-items: center;
+      backdrop-filter: blur(4px);
+      z-index: 1000;
     }
+
     .modal-content {
       background: white;
-      padding: 20px;
-      border-radius: 8px;
+      padding: 32px;
+      border-radius: 12px;
       max-width: 400px;
+      width: 90%;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
+
+    .modal-content h2 {
+      color: #111827;
+      margin: 0 0 16px;
+      font-size: 20px;
+    }
+
+    .modal-content p {
+      color: #4b5563;
+      margin: 0 0 24px;
+      font-size: 15px;
+    }
+
     .modal-buttons {
-      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
     }
+
     .modal-buttons button {
-      margin: 0 10px;
+      margin: 0;
+      width: auto;
+      min-width: 100px;
+    }
+
+    .modal-buttons button:last-child {
+      background-color: #e5e7eb;
+      color: #374151;
+    }
+
+    .modal-buttons button:last-child:hover {
+      background-color: #d1d5db;
+    }
+
+    .employee-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      :host {
+        padding: 16px;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      select,
+      input {
+        width: 100%;
+      }
     }
   `;
 
@@ -217,7 +319,7 @@ class EmployeeForm extends LitElement {
           ${this.isEditMode ? t('editEmployee') : t('addEmployee')}
           <button class="close-btn" @click=${this.handleClose}>×</button>
         </h1>
-        <form @submit=${this.handleSubmit}>
+        <form @submit=${this.handleSubmit} class="employee-form">
           <label for="firstName">${t('firstName')}</label>
           <input
             type="text"
@@ -297,13 +399,12 @@ class EmployeeForm extends LitElement {
           />
           <div class="error">${this.errors.dateOfBirth || ''}</div>
 
-          <button type="submit" @click="${() => this.handleEdit(employee.id)}">
+          <button
+            type="submit"
+            @click="${() => this.handleEdit(this.employee.id)}"
+          >
             ${this.isEditMode ? t('updateEmployee') : t('addEmployee')}
           </button>
-          <!--           <button type="submit">${this.isEditMode
-            ? t('updateEmployee')
-            : t('addEmployee')}</button>
- -->
         </form>
         <!-- Modal confirmation -->
         ${this.modalVisible
