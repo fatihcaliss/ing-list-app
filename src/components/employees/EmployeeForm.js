@@ -2,7 +2,7 @@ import {LitElement, html, css} from 'lit';
 import {getEmployees} from '../../state/store';
 import {t} from '../../localization/index.js';
 
-class EmployeeForm extends LitElement {
+export class EmployeeForm extends LitElement {
   static styles = css`
     :host {
       display: block;

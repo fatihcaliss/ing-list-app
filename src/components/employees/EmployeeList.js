@@ -3,7 +3,7 @@ import {getEmployees, deleteEmployee} from '../../state/store';
 import {t} from '../../localization/index.js';
 import {Router} from '@vaadin/router';
 
-class EmployeeList extends LitElement {
+export class EmployeeList extends LitElement {
   static styles = css`
     table {
       width: 100%;
