@@ -15,6 +15,7 @@ class App extends LitElement {
     }
     #outlet {
       margin: 0 48px;
+      overflow-x: auto;
     }
   `;
 

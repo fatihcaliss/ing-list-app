@@ -13,7 +13,7 @@ class NavigationMenu extends LitElement {
       font-family: Arial, Helvetica, sans-serif;
     }
     img {
-      width: 70px;
+      width: 50px;
       height: auto;
       border-radius: 12px;
     }

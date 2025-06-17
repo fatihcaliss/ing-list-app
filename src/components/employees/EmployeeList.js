@@ -1,6 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import {getEmployees, deleteEmployee} from '../../state/store';
 import {t} from '../../localization/index.js';
+import {Router} from '@vaadin/router';
 
 class EmployeeList extends LitElement {
   static styles = css`
@@ -428,8 +429,9 @@ class EmployeeList extends LitElement {
   handleEdit(id) {
     const urlParams = new URLSearchParams(window.location.search);
     const currentViewMode = urlParams.get('viewMode') || 'list';
-
-    window.location.href = `/edit/${id}?page=${this.currentPage}&viewMode=${currentViewMode}`;
+    Router.go(
+      `/edit/${id}?page=${this.currentPage}&viewMode=${currentViewMode}`
+    );
   }
 
   handleConfirmDelete() {

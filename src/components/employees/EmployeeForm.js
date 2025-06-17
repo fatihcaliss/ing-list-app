@@ -311,7 +311,6 @@ class EmployeeForm extends LitElement {
     const viewMode = urlParams.get('viewMode') || 'list';
     window.location.href = `/?page=1&viewMode=${viewMode}`;
   }
-
   render() {
     return html`
       <div>
@@ -372,7 +371,10 @@ class EmployeeForm extends LitElement {
           <select
             id="position"
             .value=${this.employee.position}
-            @change=${(e) => (this.employee.position = e.target.value)}
+            @change=${(e) => {
+              console.log(e.target.value, 'asdasd', t('selectPosition'));
+              return (this.employee.position = e.target.value);
+            }}
           >
             <option value="">${t('selectPosition')}</option>
             <option value="Junior">${t('junior')}</option>
